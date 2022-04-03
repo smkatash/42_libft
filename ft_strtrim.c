@@ -6,7 +6,7 @@
 /*   By: ktashbae <ktashbae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 08:54:21 by ktashbae          #+#    #+#             */
-/*   Updated: 2022/04/01 13:01:10 by ktashbae         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:43:14 by ktashbae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	i = 0;
 	start = 0;
+	if (!s1 || !set)
+		return (NULL);
 	end = ft_strlen((char *)s1);
 	while (s1[start] != '\0' && ft_strncmp_f(s1[start], set) == 1)
 	{

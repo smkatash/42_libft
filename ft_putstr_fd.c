@@ -6,16 +6,11 @@
 /*   By: ktashbae <ktashbae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:59:58 by ktashbae          #+#    #+#             */
-/*   Updated: 2022/04/01 13:10:22 by ktashbae         ###   ########.fr       */
+/*   Updated: 2022/04/03 16:02:39 by ktashbae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
 
 void	ft_putstr_fd(char *s, int fd)
 {

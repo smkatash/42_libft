@@ -6,7 +6,7 @@
 /*   By: ktashbae <ktashbae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:41:10 by ktashbae          #+#    #+#             */
-/*   Updated: 2022/03/28 15:13:39 by ktashbae         ###   ########.fr       */
+/*   Updated: 2022/04/03 18:02:59 by ktashbae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,22 @@ char	*ft_isspace(char *p)
 	return (p + i);
 }
 
+int	ft_check(char *s, int i)
+{
+	int	neg;
+
+	neg = 1;
+	if (s[i] == '-')
+	{
+		neg *= -1;
+	}
+	return (neg);
+}
+
 int	ft_atoi(const char *str)
 {
 	int		i;
-	int		num;
+	long	num;
 	int		neg;
 	char	*p;
 
@@ -39,15 +51,16 @@ int	ft_atoi(const char *str)
 	p = ft_isspace(p);
 	if (p[i] == '-' || p[i] == '+')
 	{
-		if (p[i] == '-')
-		{
-			neg *= -1;
-		}
+		neg = ft_check(p, i);
 		i++;
 	}
 	while (p[i] >= '0' && p[i] <= '9')
 	{
 		num = (num * 10) + (p[i] - '0');
+		if (num > 2147483648 && neg == -1)
+			return (0);
+		if (num > 2147483647 && neg == 1)
+			return (-1);
 		i++;
 	}
 	return (num * neg);

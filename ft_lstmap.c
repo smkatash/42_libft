@@ -6,7 +6,7 @@
 /*   By: ktashbae <ktashbae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 10:56:45 by ktashbae          #+#    #+#             */
-/*   Updated: 2022/04/03 14:19:09 by ktashbae         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:09:53 by ktashbae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*n_list;
 	t_list	*node;
 
+	if (!lst)
+		return (NULL);
 	node = ft_lstnew(f(lst->content));
 	if (!node)
 		return (NULL);
