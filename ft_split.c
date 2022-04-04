@@ -6,57 +6,54 @@
 /*   By: ktashbae <ktashbae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:52:31 by ktashbae          #+#    #+#             */
-/*   Updated: 2022/04/03 18:36:59 by ktashbae         ###   ########.fr       */
+/*   Updated: 2022/04/04 08:17:11 by ktashbae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strlen_c(char const *s, char c)
+int	ft_letter_count(int i, char const *s, char c)
 {
-	int	i;
+	int	p;
+	int	let;
+	int	size;
 
-	i = 0;
-	while (s[i] != c && s[i])
+	p = 0;
+	size = 0;
+	while (size <= i && s[p])
 	{
-		i++;
+		let = 0;
+		while (s[p] == c && s[p])
+			p++;
+		while (s[p] != c && s[p])
+		{
+			let++;
+			p++;
+		}
+		size++;
 	}
-	return (i);
-}
-
-char	*ft_strlcpy_f(char *dst, const char *src, const char c)
-{
-	size_t	i;
-
-	i = 0;
-	while (src[i] != '\0' && src[i] != c)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = 0;
-	return (dst);
+	return (let);
 }
 
 int	ft_word_count(char const *s, char c)
 {
-	size_t	i;
-	int		count;
+	int	i;
+	int	word_len;
 
 	i = 0;
-	count = 0;
+	word_len = 0;
 	while (s[i])
 	{
 		if (s[i] != c)
 		{
-			count++;
+			word_len++;
 			while (s[i] != c && s[i])
 				i++;
 		}
 		else
 			i++;
 	}
-	return (count);
+	return (word_len);
 }
 
 char	**ft_free(char **arr, size_t p)
@@ -73,33 +70,42 @@ char	**ft_free(char **arr, size_t p)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_ptrcpy(int i, char c, char *s, char **arr_p)
 {
-	size_t	i;
-	size_t	p;
-	char	**arr_p;
-	char	*ptr;
+	int	j;
+	int	ptr;
 
-	i = 0;
-	p = 0;
-	if (!s)
-		return (NULL);
-	arr_p = ft_calloc((ft_word_count(s, c) + 1), sizeof(char *));
-	if (!arr_p)
-		return (NULL);
+	ptr = 0;
+	while (s[i] == c && s[i])
+			i++;
 	while (s[i])
 	{
-		while (s[i] == c && s[i] != '\0')
+		j = 0;
+		arr_p[ptr] = malloc(sizeof(char) * (ft_letter_count(ptr, s, c) + 1));
+		if (!arr_p[ptr])
+			return (ft_free(arr_p, ptr));
+		while (s[i] != c && s[i])
+			arr_p[ptr][j++] = s[i++];
+		while (s[i] == c && s[i])
 			i++;
-		if (s[i])
-		{
-			ptr = malloc(ft_strlen_c(&s[i], c) + 1);
-			if (!ptr)
-				return (ft_free(arr_p, p));
-			arr_p[p] = ft_strlcpy_f(ptr, &s[i], c);
-			p++;
-			i += ft_strlen_c(&s[i], c);
-		}
+		arr_p[ptr][j] = '\0';
+		ptr++;
 	}
+	arr_p[ptr] = 0;
+	return (arr_p);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**arr_p;
+	int		i;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	arr_p = malloc(sizeof(char *) * (ft_word_count(s, c) + 1));
+	if (!arr_p)
+		return (NULL);
+	arr_p = ft_ptrcpy(i, c, (char *)s, arr_p);
 	return (arr_p);
 }

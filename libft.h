@@ -6,7 +6,7 @@
 /*   By: ktashbae <ktashbae@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 22:07:23 by ktashbae          #+#    #+#             */
-/*   Updated: 2022/04/03 14:00:42 by ktashbae         ###   ########.fr       */
+/*   Updated: 2022/04/04 08:52:32 by ktashbae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-
+// Type defintion
 typedef struct s_list
 {
 	void			*content;
